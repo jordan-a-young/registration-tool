@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Home from "./containers/Home";
-import ApplicationSearch from "./containers/ApplicationSearch";
-import Results from "./containers/Results";
-import AppInfo from "./containers/AppInfo";
-import "./index.css";
+import Home from "../containers/Home";
+import ApplicationSearch from "../containers/ApplicationSearch";
+import Results from "../containers/Results";
+import AppInfo from "../containers/AppInfo";
+import "../index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
@@ -14,15 +14,10 @@ class App extends React.Component {
 			<div>
 				<Switch>
 					<Route exact path="/" component={Home} />
-					<Route
-						path="/ApplicationSearch"
-						component={ApplicationSearch}
-					/>
+					<Route path="/ApplicationSearch" component={ApplicationSearch} />
 					<Route
 						path="/Results"
-						render={props => (
-							<Results values={APPINFO} {...props} />
-						)}
+						render={props => <Results values={APPINFO} {...props} />}
 					/>
 					<Route
 						path="/AppInfo"

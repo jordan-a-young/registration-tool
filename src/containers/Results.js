@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem, Button, Fade } from "reactstrap";
+import { Container, Button, Fade } from "reactstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import Header from "../components/Header";
 
@@ -63,37 +63,28 @@ class Results extends React.Component {
 			clickToSelect: true,
 			bgColor: "#C8E6C9",
 			onSelect: this.onRowSelect,
-			selectionRenderer: ({ mode, ...rest }) => (
-				<input type={mode} {...rest} />
-			),
+			selectionRenderer: ({ mode, ...rest }) => <input type={mode} {...rest} />,
 			selectionHeaderRenderer: () => "X"
 		};
 
 		return (
 			<div>
-				<Header title="Application Search Results" />
-				<Breadcrumb tag="nav">
-					<BreadcrumbItem tag="a" href="/">
-						Home
-					</BreadcrumbItem>
-					<BreadcrumbItem tag="a" href="/ApplicationSearch">
-						Search
-					</BreadcrumbItem>
-					<BreadcrumbItem active>Results</BreadcrumbItem>
-				</Breadcrumb>
-				<BootstrapTable
-					onSubmit={this.handleSubmit}
-					id="resultTable"
-					keyField="appID"
-					data={this.state.data}
-					columns={this.state.columns}
-					selectRow={selectRow}
-				/>
-				<Fade in={this.state.rowSelected}>
-					<Button color="success" tag="a" href="/AppInfo">
-						Select
-					</Button>
-				</Fade>
+				<Header title="Application Search Results" currentPage="results" />
+				<Container>
+					<BootstrapTable
+						onSubmit={this.handleSubmit}
+						id="resultTable"
+						keyField="appID"
+						data={this.state.data}
+						columns={this.state.columns}
+						selectRow={selectRow}
+					/>
+					<Fade in={this.state.rowSelected}>
+						<Button color="success" tag="a" href="/AppInfo">
+							Select
+						</Button>
+					</Fade>
+				</Container>
 			</div>
 		);
 	}

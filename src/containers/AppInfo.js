@@ -1,13 +1,5 @@
 import React from "react";
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	Row,
-	Col,
-	Card,
-	CardBody,
-	Button
-} from "reactstrap";
+import { Container, Row, Col, Card, CardBody, Button } from "reactstrap";
 import axios from "axios";
 import Header from "../components/Header";
 import OrgInfo from "../components/OrgInfo";
@@ -70,19 +62,7 @@ class AppInfo extends React.Component {
 	render() {
 		return (
 			<div id="appInfo">
-				<Header title="Application Info" />
-				<Breadcrumb tag="nav">
-					<BreadcrumbItem tag="a" href="/">
-						Home
-					</BreadcrumbItem>
-					<BreadcrumbItem tag="a" href="/ApplicationSearch">
-						Search
-					</BreadcrumbItem>
-					<BreadcrumbItem tag="a" href="/Results">
-						Results
-					</BreadcrumbItem>
-					<BreadcrumbItem active>Application</BreadcrumbItem>
-				</Breadcrumb>
+				<Header title="Application Info" currentPage="info" />
 				<Row>
 					<Col sm="6">
 						<OrgInfo info={this.state.org} />
@@ -102,29 +82,17 @@ class AppInfo extends React.Component {
 									<Button color="info" type="submit">
 										Update Status
 									</Button>{" "}
-									<Button
-										color="info"
-										tag="a"
-										href="/Results"
-									>
+									<Button color="info" tag="a" href="/Results">
 										Search Results
 									</Button>{" "}
-									<Button
-										color="danger"
-										tag="a"
-										href="/ApplicationSearch"
-									>
+									<Button color="danger" tag="a" href="/ApplicationSearch">
 										Search Again
 									</Button>
 								</div>
 							</CardBody>
 						</Card>
 					</Col>
-					<ul>
-						{this.state.persons.map(person => (
-							<li>{person.name}</li>
-						))}
-					</ul>
+					<ul>{this.state.persons.map(person => <li>{person.name}</li>)}</ul>
 				</Row>
 			</div>
 		);

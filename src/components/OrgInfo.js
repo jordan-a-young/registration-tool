@@ -7,6 +7,7 @@ import {
 	ListGroup,
 	ListGroupItem
 } from "reactstrap";
+import ProviderVerify from "./ProviderVerify";
 import axios from "axios";
 
 class OrgInfo extends React.Component {
@@ -31,10 +32,7 @@ class OrgInfo extends React.Component {
 			crossDomain: true
 		};
 		axios
-			.get(
-				this.state.corsUrl + this.state.nppesUrl + this.props.npi,
-				config
-			)
+			.get(this.state.corsUrl + this.state.nppesUrl + this.props.npi, config)
 			.then(res => {
 				console.log(res);
 				const data = res.data.results;
@@ -65,13 +63,9 @@ class OrgInfo extends React.Component {
 							<ListGroupItem>
 								<strong>NPI: </strong>
 								{this.props.info.npi}
-								<Button
-									color="info"
-									id="verifyBtn"
-									onClick={this.handleNPIFetch}
-								>
-									Verify
-								</Button>
+							</ListGroupItem>
+							<ListGroupItem>
+								<ProviderVerify data={this.state.data} />
 							</ListGroupItem>
 							<ListGroupItem>
 								<strong>Physical Address: </strong>

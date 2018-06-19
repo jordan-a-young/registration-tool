@@ -29,8 +29,7 @@ class AppInfo extends React.Component {
 			},
 			nppesUrl: "https://npiregistry.cms.hhs.gov/api?number=",
 			corsUrl: "https://cors-anywhere.herokuapp.com/",
-			data: [],
-			persons: []
+			data: []
 		};
 
 		this.handleNPIFetch = this.handleNPIFetch.bind(this);
@@ -46,11 +45,7 @@ class AppInfo extends React.Component {
 
 	handleNPIFetch() {
 		axios
-			.get(
-				"https://cors-anywhere.herokuapp.com/" +
-					this.state.nppesUrl +
-					this.state.org.npi
-			)
+			.get(this.state.corsUrl + this.state.nppesUrl + this.state.org.npi)
 			.then(res => {
 				console.log(res);
 				const data = res.data.results;
@@ -63,37 +58,38 @@ class AppInfo extends React.Component {
 		return (
 			<div id="appInfo">
 				<Header title="Application Info" currentPage="info" />
-				<Row>
-					<Col sm="6">
-						<OrgInfo info={this.state.org} />
-					</Col>
-					<Col sm="6">
-						<AdminInfo info={this.state.admin} />
-					</Col>
-				</Row>
-				<Row>
-					<Col sm="6">
-						<Card>
-							<CardBody>
-								<div id="appInfoBtns">
-									<Button color="success" type="submit">
-										Submit
-									</Button>{" "}
-									<Button color="info" type="submit">
-										Update Status
-									</Button>{" "}
-									<Button color="info" tag="a" href="/Results">
-										Search Results
-									</Button>{" "}
-									<Button color="danger" tag="a" href="/ApplicationSearch">
-										Search Again
-									</Button>
-								</div>
-							</CardBody>
-						</Card>
-					</Col>
-					<ul>{this.state.persons.map(person => <li>{person.name}</li>)}</ul>
-				</Row>
+				<Container>
+					<Row>
+						<Col sm="6">
+							<OrgInfo info={this.state.org} />
+						</Col>
+						<Col sm="6">
+							<AdminInfo info={this.state.admin} />
+						</Col>
+					</Row>
+					<Row>
+						<Col sm="6">
+							<Card>
+								<CardBody>
+									<div id="appInfoBtns">
+										<Button color="success" type="submit">
+											Submit
+										</Button>{" "}
+										<Button color="info" type="submit">
+											Update Status
+										</Button>{" "}
+										<Button color="info" tag="a" href="/Results">
+											Search Results
+										</Button>{" "}
+										<Button color="danger" tag="a" href="/ApplicationSearch">
+											Search Again
+										</Button>
+									</div>
+								</CardBody>
+							</Card>
+						</Col>
+					</Row>
+				</Container>
 			</div>
 		);
 	}

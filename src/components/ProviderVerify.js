@@ -10,9 +10,10 @@ class ProviderVerify extends React.Component {
 			popoverOpen: false,
 			nppesUrl: "https://npiregistry.cms.hhs.gov/api?number=",
 			corsUrl: "https://cors-anywhere.herokuapp.com/",
-			npi: this.props.npi
+			npi: this.props.data.npi
 		};
 		this.toggle = this.toggle.bind(this);
+		this.handleSearch = this.handleSearch.bind(this);
 	}
 
 	toggle() {
@@ -28,19 +29,51 @@ class ProviderVerify extends React.Component {
 				console.log(res);
 				const data = res.data.results;
 				console.log(data);
+				console.log(
+					data[0].addresses[0].address_1 +
+						"\n" +
+						data[0].addresses[0].address_2 +
+						"\n" +
+						data[0].addresses[0].city +
+						"\n" +
+						data[0].addresses[0].state
+				);
 				this.setState({
 					data: data.addresses
 				});
 			});
 	}
 
+	handleSearch() {
+		axios
+			.get(this.state.corsUrl + this.state.nppesUrl + this.state.npi)
+			.then(res => {
+				console.log(res);
+				const data = res.data.results;
+				console.log(data);
+				console.log(
+					data[0].addresses[0].address_1 +
+						"\n" +
+						data[0].addresses[0].address_2 +
+						"\n" +
+						data[0].addresses[0].city +
+						", " +
+						data[0].addresses[0].state
+				);
+				this.setState({
+					data: data
+				});
+			});
+		this.toggle();
+	}
+
 	render() {
 		let info;
 		if (this.state.data) info = this.state.data.results;
-		else info = "Nothing received";
+		else info = "Loading...";
 		return (
 			<div>
-				<Button color="info" id="verifyBtn" onClick={this.toggle}>
+				<Button color="info" id="verifyBtn" onClick={this.handleSearch}>
 					Verify NPI
 				</Button>
 				<Popover

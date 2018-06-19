@@ -3,12 +3,10 @@ import {
 	Card,
 	CardBody,
 	CardTitle,
-	Button,
 	ListGroup,
 	ListGroupItem
 } from "reactstrap";
 import ProviderVerify from "./ProviderVerify";
-import axios from "axios";
 
 class OrgInfo extends React.Component {
 	constructor(props) {
@@ -18,27 +16,6 @@ class OrgInfo extends React.Component {
 			nppesUrl: "https://npiregistry.cms.hhs.gov/api?number=",
 			corsUrl: "https://cors-anywhere.herokuapp.com/"
 		};
-
-		this.handleNPIFetch = this.handleNPIFetch.bind(this);
-	}
-
-	handleNPIFetch() {
-		const config = {
-			headers: {
-				"Access-Control-Allow-Origin": "*",
-				"Content-Type": "application/json; charset=utf-8"
-			},
-			data: null,
-			crossDomain: true
-		};
-		axios
-			.get(this.state.corsUrl + this.state.nppesUrl + this.props.npi, config)
-			.then(res => {
-				console.log(res);
-				const data = res.data.results;
-				this.setState({ data });
-				console.log(this.state.data);
-			});
 	}
 
 	render() {
@@ -65,7 +42,7 @@ class OrgInfo extends React.Component {
 								{this.props.info.npi}
 							</ListGroupItem>
 							<ListGroupItem>
-								<ProviderVerify data={this.state.data} />
+								<ProviderVerify data={this.props.info} />
 							</ListGroupItem>
 							<ListGroupItem>
 								<strong>Physical Address: </strong>

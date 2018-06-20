@@ -5,6 +5,7 @@
 	"keywords": [],
 	"main": "src/index.js",
 	"dependencies": {
+		"availity-reactstrap-validation": "2.0.2",
 		"axios": "0.18.0",
 		"bootstrap": "latest",
 		"eslint": "^4.19.1",

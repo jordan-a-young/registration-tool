@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Button, Fade } from "reactstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import Header from "../components/Header";
+import ResultsTable from "../components/ResultsTable";
 
 class Results extends React.Component {
 	constructor(props) {
@@ -58,32 +59,19 @@ class Results extends React.Component {
 	}
 
 	render() {
-		const selectRow = {
-			mode: "radio",
-			clickToSelect: true,
-			bgColor: "#C8E6C9",
-			onSelect: this.onRowSelect,
-			selectionRenderer: ({ mode, ...rest }) => <input type={mode} {...rest} />,
-			selectionHeaderRenderer: () => "X"
-		};
-
 		return (
 			<div>
 				<Header title="Application Search Results" currentPage="results" />
 				<Container>
-					<BootstrapTable
-						onSubmit={this.handleSubmit}
-						id="resultTable"
-						keyField="appID"
-						data={this.state.data}
-						columns={this.state.columns}
-						selectRow={selectRow}
-					/>
+					<ResultsTable values={this.props.values} />
 					<Fade in={this.state.rowSelected}>
 						<Button color="success" tag="a" href="/AppInfo">
 							Select
 						</Button>
 					</Fade>
+					<Button color="success" tag="a" href="/AppInfo">
+						Select
+					</Button>
 				</Container>
 			</div>
 		);

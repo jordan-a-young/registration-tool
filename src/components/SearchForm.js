@@ -1,14 +1,11 @@
 import React from "react";
+import { FormGroup, Label, Button, Card, CardTitle } from "reactstrap";
 import {
-	Form,
-	FormGroup,
-	Label,
-	Input,
-	Button,
-	Card,
-	CardBody,
-	CardTitle
-} from "reactstrap";
+	AvForm,
+	AvGroup,
+	AvInput,
+	AvFeedback
+} from "availity-reactstrap-validation";
 import { Redirect } from "react-router-dom";
 
 class SearchForm extends React.Component {
@@ -16,6 +13,7 @@ class SearchForm extends React.Component {
 		super();
 		this.state = { submitted: false };
 
+		this.handleReset = this.handleReset.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -28,55 +26,49 @@ class SearchForm extends React.Component {
 		this.setState({ submitted: true });
 	}
 
+	handleReset(event) {
+		document.getElementById("searchForm").reset();
+	}
+
 	render() {
 		if (this.state.submitted) {
 			return <Redirect to="/Results" />;
 		} else {
 			return (
-				<div id="searchForm">
+				<div>
 					<Card>
-						<CardTitle>Search for an application</CardTitle>
-						<CardBody>
-							<Form id="searchForm" onSubmit={this.handleSubmit}>
-								<FormGroup>
-									<Label for="orgName">
-										Organization Name:
-									</Label>
-									<Input
-										type="text"
-										name="orgName"
-										id="orgName"
-										placeholder="Organization Name"
-									/>
-								</FormGroup>
-								<FormGroup>
-									<Label for="appID">Application ID: </Label>
-									<Input
-										type="number"
-										name="appID"
-										id="appID"
-										placeholder="Application ID"
-									/>
-								</FormGroup>
-								<FormGroup>
-									<Label for="taxID">Tax ID: </Label>
-									<Input
-										type="number"
-										name="taxID"
-										id="taxID"
-										placeholder="Tax ID"
-									/>
-								</FormGroup>
-								<div id="formButtons">
-									<Button type="submit" color="success">
-										Submit
-									</Button>{" "}
-									<Button type="reset" color="danger">
-										Reset
-									</Button>
-								</div>
-							</Form>
-						</CardBody>
+						<CardTitle>Search for an Application</CardTitle>
+						<AvForm
+							id="searchForm"
+							onSubmit={this.handleSubmit}
+							onReset={this.handleReset}
+						>
+							<AvGroup>
+								<Label for="orgName">Organization Name: </Label>
+								<AvInput name="orgName" id="orgName" />
+								<AvFeedback>Invalid organization name entered.</AvFeedback>
+							</AvGroup>
+							<AvGroup>
+								<Label for="appID">Application ID: </Label>
+								<AvInput name="appID" id="appID" />
+								<AvFeedback>
+									Application ID should only contain numbers.
+								</AvFeedback>
+							</AvGroup>
+							<AvGroup>
+								<Label for="taxID">Tax ID: </Label>
+								<AvInput name="taxID" id="taxID" />
+								<AvFeedback>Tax ID should only contain numbers.</AvFeedback>
+							</AvGroup>
+							<FormGroup>
+								<Button type="submit" color="success">
+									Submit
+								</Button>{" "}
+								<Button type="reset" color="danger" onClick={this.handleReset}>
+									Clear
+								</Button>
+							</FormGroup>
+						</AvForm>
 					</Card>
 				</div>
 			);

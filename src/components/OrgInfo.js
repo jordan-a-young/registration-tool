@@ -11,11 +11,6 @@ import ProviderVerify from "./ProviderVerify";
 class OrgInfo extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			data: [],
-			nppesUrl: "https://npiregistry.cms.hhs.gov/api?number=",
-			corsUrl: "https://cors-anywhere.herokuapp.com/"
-		};
 	}
 
 	render() {

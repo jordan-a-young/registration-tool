@@ -6,19 +6,14 @@ import { Redirect } from "react-router-dom";
 class SearchForm extends React.Component {
 	constructor() {
 		super();
-		this.state = { submitted: false };
+		this.state = { data: [], submitted: false };
 
 		this.handleReset = this.handleReset.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleSubmit(event) {
-		event.preventDefault();
-		const data = new FormData(event.target);
-		console.log(data.get("orgName"));
-		console.log(data.get("appID"));
-		console.log(data.get("taxID"));
-		this.setState({ submitted: true });
+	handleSubmit(event, values) {
+		this.setState({ data: values, submitted: !this.state.submitted });
 	}
 
 	handleReset(event) {

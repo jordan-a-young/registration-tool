@@ -27,21 +27,11 @@ class AppInfo extends React.Component {
 				email: this.props.data.email,
 				phone: this.props.data.adminPhone
 			},
-			nppesUrl: "https://npiregistry.cms.hhs.gov/api?number=",
-			corsUrl: "https://cors-anywhere.herokuapp.com/",
 			data: []
 		};
 
 		this.handleNPIFetch = this.handleNPIFetch.bind(this);
 	}
-
-	/*componentDidMount() {
-		axios.get("https://jsonplaceholder.typicode.com/users").then(res => {
-			console.log(res);
-			const persons = res.data;
-			this.setState({ persons });
-		});
-	}*/
 
 	handleNPIFetch() {
 		axios

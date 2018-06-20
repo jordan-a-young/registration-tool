@@ -1,6 +1,7 @@
 import React from "react";
 import { FormGroup, Label, Button, Card, CardTitle } from "reactstrap";
 import {
+	AvField,
 	AvForm,
 	AvGroup,
 	AvInput,
@@ -40,26 +41,32 @@ class SearchForm extends React.Component {
 						<CardTitle>Search for an Application</CardTitle>
 						<AvForm
 							id="searchForm"
-							onSubmit={this.handleSubmit}
+							onValidSubmit={this.handleSubmit}
 							onReset={this.handleReset}
 						>
-							<AvGroup>
-								<Label for="orgName">Organization Name: </Label>
-								<AvInput name="orgName" id="orgName" />
-								<AvFeedback>Invalid organization name entered.</AvFeedback>
-							</AvGroup>
-							<AvGroup>
-								<Label for="appID">Application ID: </Label>
-								<AvInput name="appID" id="appID" />
-								<AvFeedback>
-									Application ID should only contain numbers.
-								</AvFeedback>
-							</AvGroup>
-							<AvGroup>
-								<Label for="taxID">Tax ID: </Label>
-								<AvInput name="taxID" id="taxID" />
-								<AvFeedback>Tax ID should only contain numbers.</AvFeedback>
-							</AvGroup>
+							<AvField
+								id="orgName"
+								name="orgName"
+								label="Organization Name: "
+								type="text"
+								placeholder="Organization Name"
+							/>
+							<AvField
+								id="appID"
+								name="appID"
+								label="Application ID: "
+								type="text"
+								placeholder="Application ID"
+								validate={{ number: true }}
+							/>
+							<AvField
+								id="taxID"
+								name="taxID"
+								label="Tax ID: "
+								type="text"
+								placeholder="Tax ID"
+								validate={{ number: true }}
+							/>
 							<FormGroup>
 								<Button type="submit" color="success">
 									Submit

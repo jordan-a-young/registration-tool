@@ -1,12 +1,6 @@
 import React from "react";
 import { FormGroup, Label, Button, Card, CardTitle } from "reactstrap";
-import {
-	AvField,
-	AvForm,
-	AvGroup,
-	AvInput,
-	AvFeedback
-} from "availity-reactstrap-validation";
+import { AvField, AvForm } from "availity-reactstrap-validation";
 import { Redirect } from "react-router-dom";
 
 class SearchForm extends React.Component {
@@ -28,7 +22,7 @@ class SearchForm extends React.Component {
 	}
 
 	handleReset(event) {
-		document.getElementById("searchForm").reset();
+		this.form && this.form.reset();
 	}
 
 	render() {
@@ -43,6 +37,7 @@ class SearchForm extends React.Component {
 							id="searchForm"
 							onValidSubmit={this.handleSubmit}
 							onReset={this.handleReset}
+							ref={c => (this.form = c)}
 						>
 							<AvField
 								id="orgName"

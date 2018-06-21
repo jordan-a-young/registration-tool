@@ -37,7 +37,10 @@ class OrgInfo extends React.Component {
 								{this.props.info.npi}
 							</ListGroupItem>
 							<ListGroupItem>
-								<ProviderVerify data={this.props.info} />
+								<ProviderVerify
+									data={this.props.info}
+									orgName={this.props.info.name}
+								/>
 							</ListGroupItem>
 							<ListGroupItem>
 								<strong>Physical Address: </strong>

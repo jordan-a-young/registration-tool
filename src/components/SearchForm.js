@@ -12,11 +12,11 @@ class SearchForm extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleSubmit(event, values) {
+	handleSubmit(values) {
 		this.setState({ data: values, submitted: !this.state.submitted });
 	}
 
-	handleReset(event) {
+	handleReset() {
 		this.form && this.form.reset();
 	}
 

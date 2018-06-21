@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Popover, PopoverBody, PopoverHeader } from "reactstrap";
 import axios from "axios";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 class ProviderVerify extends React.Component {
 	constructor(props) {
@@ -11,10 +12,13 @@ class ProviderVerify extends React.Component {
 			nppesUrl: "https://npiregistry.cms.hhs.gov/api?number=",
 			corsUrl: "https://cors-anywhere.herokuapp.com/",
 			npi: this.props.data.npi,
-			address: ""
+			address: "",
+			value: "",
+			copied: false
 		};
 		this.toggle = this.toggle.bind(this);
 		this.handleSearch = this.handleSearch.bind(this);
+		this.searchGoogle = this.searchGoogle.bind(this);
 	}
 
 	toggle() {
@@ -47,6 +51,13 @@ class ProviderVerify extends React.Component {
 		}
 	}
 
+	searchGoogle() {
+		if (this.state.address) window.open("https://www.google.com");
+		else {
+			console.log("You need to verify npi first");
+		}
+	}
+
 	render() {
 		let info;
 		if (this.state.address) info = this.state.address;
@@ -57,13 +68,20 @@ class ProviderVerify extends React.Component {
 					Verify NPI
 				</Button>
 				<Popover
-					placement="right"
+					placement="top"
 					isOpen={this.state.popoverOpen}
 					target="verifyBtn"
 				>
 					<PopoverHeader>NPPESS Results</PopoverHeader>
 					<PopoverBody>{info}</PopoverBody>
 				</Popover>
+				{"  "}
+				<CopyToClipboard
+					text={this.props.orgName + " " + this.state.address}
+					onCopy={this.searchGoogle}
+				>
+					<Button color="info">Search Google</Button>
+				</CopyToClipboard>
 			</div>
 		);
 	}

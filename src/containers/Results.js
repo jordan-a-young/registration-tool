@@ -47,15 +47,6 @@ class Results extends React.Component {
 				}
 			]
 		};
-
-		this.onRowSelect = this.onRowSelect.bind(this);
-	}
-
-	onRowSelect(row) {
-		this.setState({
-			rowSelected: !this.state.rowSelected,
-			selected: row.appID
-		});
 	}
 
 	render() {
@@ -64,14 +55,6 @@ class Results extends React.Component {
 				<Header title="Application Search Results" currentPage="results" />
 				<Container>
 					<ResultsTable values={this.props.values} />
-					<Fade in={this.state.rowSelected}>
-						<Button color="success" tag="a" href="/AppInfo">
-							Select
-						</Button>
-					</Fade>
-					<Button color="success" tag="a" href="/AppInfo">
-						Select
-					</Button>
 				</Container>
 			</div>
 		);

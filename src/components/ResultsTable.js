@@ -1,5 +1,7 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
+import { Button } from "reactstrap";
+import { Redirect } from "react-router-dom";
 
 class ResultsTable extends React.Component {
 	constructor(props) {
@@ -7,6 +9,7 @@ class ResultsTable extends React.Component {
 		this.state = {
 			rowSelected: false,
 			selected: "",
+			row: {},
 			data: [
 				{
 					appID: this.props.values.appID,
@@ -48,12 +51,7 @@ class ResultsTable extends React.Component {
 		this.onRowSelect = this.onRowSelect.bind(this);
 	}
 
-	onRowSelect(row) {
-		this.setState({
-			rowSelected: !this.state.rowSelected,
-			selected: row.appID
-		});
-	}
+	onRowSelect() {}
 
 	render() {
 		const selectRow = {
@@ -61,11 +59,7 @@ class ResultsTable extends React.Component {
 			clickToSelect: true,
 			bgColor: "#C8E6C9",
 			hideSelectColumn: true
-			/*onSelect: this.onRowSelect
-			selectionRenderer: ({ mode, ...rest }) => <input type={mode} {...rest} />,
-			selectionHeaderRenderer: () => "X"*/
 		};
-
 		return (
 			<div>
 				<BootstrapTable
@@ -75,6 +69,9 @@ class ResultsTable extends React.Component {
 					columns={this.state.columns}
 					selectRow={selectRow}
 				/>
+				<Button color="success" tag="a" href="/AppInfo">
+					Select
+				</Button>
 			</div>
 		);
 	}

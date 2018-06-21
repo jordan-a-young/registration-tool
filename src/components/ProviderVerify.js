@@ -10,7 +10,8 @@ class ProviderVerify extends React.Component {
 			popoverOpen: false,
 			nppesUrl: "https://npiregistry.cms.hhs.gov/api?number=",
 			corsUrl: "https://cors-anywhere.herokuapp.com/",
-			npi: this.props.data.npi
+			npi: this.props.data.npi,
+			address: ""
 		};
 		this.toggle = this.toggle.bind(this);
 		this.handleSearch = this.handleSearch.bind(this);
@@ -22,54 +23,33 @@ class ProviderVerify extends React.Component {
 		});
 	}
 
-	asdfcomponentDidMount() {
-		axios
-			.get(this.state.corsUrl + this.state.nppesUrl + this.state.npi)
-			.then(res => {
-				console.log(res);
-				const data = res.data.results;
-				console.log(data);
-				console.log(
-					data[0].addresses[0].address_1 +
-						"\n" +
-						data[0].addresses[0].address_2 +
-						"\n" +
-						data[0].addresses[0].city +
-						"\n" +
-						data[0].addresses[0].state
-				);
-				this.setState({
-					data: data.addresses
-				});
-			});
-	}
-
 	handleSearch() {
-		axios
-			.get(this.state.corsUrl + this.state.nppesUrl + this.state.npi)
-			.then(res => {
-				console.log(res);
-				const data = res.data.results;
-				console.log(data);
-				console.log(
-					data[0].addresses[0].address_1 +
+		if (this.state.address) {
+			this.toggle();
+		} else {
+			axios
+				.get(this.state.corsUrl + this.state.nppesUrl + this.state.npi)
+				.then(res => {
+					const data = res.data.results;
+					const address =
+						data[0].addresses[0].address_1 +
 						"\n" +
 						data[0].addresses[0].address_2 +
 						"\n" +
 						data[0].addresses[0].city +
 						", " +
-						data[0].addresses[0].state
-				);
-				this.setState({
-					data: data
+						data[0].addresses[0].state;
+					this.setState({
+						address: address
+					});
 				});
-			});
-		this.toggle();
+			this.toggle();
+		}
 	}
 
 	render() {
 		let info;
-		if (this.state.data) info = this.state.data.results;
+		if (this.state.address) info = this.state.address;
 		else info = "Loading...";
 		return (
 			<div>

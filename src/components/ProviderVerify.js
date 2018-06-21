@@ -1,5 +1,11 @@
 import React from "react";
-import { Button, Popover, PopoverBody, PopoverHeader } from "reactstrap";
+import {
+	Button,
+	Popover,
+	PopoverBody,
+	PopoverHeader,
+	Tooltip
+} from "reactstrap";
 import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -7,21 +13,22 @@ class ProviderVerify extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: this.props.data.results,
-			popoverOpen: false,
 			nppesUrl: "https://npiregistry.cms.hhs.gov/api?number=",
 			corsUrl: "https://cors-anywhere.herokuapp.com/",
 			npi: this.props.data.npi,
 			address: "",
-			value: "",
-			copied: false
+			copied: false,
+			popoverOpen: false,
+			tooltipOpen: false,
+			tooltipText: "Verify NPI first to search Google."
 		};
-		this.toggle = this.toggle.bind(this);
+		this.popoverToggle = this.popoverToggle.bind(this);
+		this.tooltipToggle = this.tooltipToggle.bind(this);
 		this.handleSearch = this.handleSearch.bind(this);
 		this.searchGoogle = this.searchGoogle.bind(this);
 	}
 
-	toggle() {
+	popoverToggle() {
 		this.setState({
 			popoverOpen: !this.state.popoverOpen
 		});
@@ -29,7 +36,7 @@ class ProviderVerify extends React.Component {
 
 	handleSearch() {
 		if (this.state.address) {
-			this.toggle();
+			this.popoverToggle();
 		} else {
 			axios
 				.get(this.state.corsUrl + this.state.nppesUrl + this.state.npi)
@@ -37,9 +44,9 @@ class ProviderVerify extends React.Component {
 					const data = res.data.results;
 					const address =
 						data[0].addresses[0].address_1 +
-						"\n" +
+						" " +
 						data[0].addresses[0].address_2 +
-						"\n" +
+						" " +
 						data[0].addresses[0].city +
 						", " +
 						data[0].addresses[0].state;
@@ -47,8 +54,14 @@ class ProviderVerify extends React.Component {
 						address: address
 					});
 				});
-			this.toggle();
+			this.popoverToggle();
 		}
+	}
+
+	tooltipToggle() {
+		this.setState({
+			tooltipOpen: !this.state.tooltipOpen
+		});
 	}
 
 	searchGoogle() {
@@ -59,9 +72,15 @@ class ProviderVerify extends React.Component {
 	}
 
 	render() {
-		let info;
-		if (this.state.address) info = this.state.address;
-		else info = "Loading...";
+		let info, tooltipText;
+		if (this.state.address) {
+			info = this.state.address;
+			tooltipText =
+				"Click here to open Google search and copy organization info to clipboard.";
+		} else {
+			info = "Loading...";
+			tooltipText = "Verify NPI first to search Google.";
+		}
 		return (
 			<div>
 				<Button color="info" id="verifyBtn" onClick={this.handleSearch}>
@@ -80,8 +99,18 @@ class ProviderVerify extends React.Component {
 					text={this.props.orgName + " " + this.state.address}
 					onCopy={this.searchGoogle}
 				>
-					<Button color="info">Search Google</Button>
+					<Button color="info" id="searchBtn">
+						Search Google
+					</Button>
 				</CopyToClipboard>
+				<Tooltip
+					placement="right"
+					isOpen={this.state.tooltipOpen}
+					target="searchBtn"
+					toggle={this.tooltipToggle}
+				>
+					{tooltipText}
+				</Tooltip>
 			</div>
 		);
 	}

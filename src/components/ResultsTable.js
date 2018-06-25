@@ -1,32 +1,20 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-import { Button } from "reactstrap";
-import { Redirect } from "react-router-dom";
+import { Button, Fade } from "reactstrap";
 
 class ResultsTable extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			rowSelected: false,
-			selected: "",
-			row: {},
-			data: [
-				{
-					appID: this.props.values.appID,
-					orgName: this.props.values.name,
-					taxID: this.props.values.taxID,
-					npi: this.props.values.npi,
-					address: this.props.values.address,
-					status: this.props.values.status
-				}
-			],
+			selected: [],
 			columns: [
 				{
 					dataField: "appID",
 					text: "Application ID"
 				},
 				{
-					dataField: "orgName",
+					dataField: "name",
 					text: "Organization Name"
 				},
 				{
@@ -49,29 +37,56 @@ class ResultsTable extends React.Component {
 		};
 
 		this.onRowSelect = this.onRowSelect.bind(this);
+		this.toggle = this.toggle.bind(this);
 	}
 
-	onRowSelect() {}
+	onRowSelect({ appID }, isSelected) {
+		if (isSelected && this.state.selected.length !== 1) {
+			this.setState({
+				selected: [...this.state.selected, appID].sort(),
+				rowSelected: isSelected
+			});
+		} else {
+			this.setState({
+				selected: this.state.selected.filter(it => it !== appID),
+				rowSelected: isSelected
+			});
+		}
 
-	render() {
+		return false;
+	}
+
+	toggle() {
+		this.setState({ rowSelected: !this.state.rowSelected });
+	}
+
+	render(isSelected) {
 		const selectRow = {
 			mode: "checkbox",
 			clickToSelect: true,
 			bgColor: "#C8E6C9",
-			hideSelectColumn: true
+			hideSelectColumn: true,
+			onSelect: this.onRowSelect,
+			selected: this.state.selected
 		};
+		console.log(this.state.rowSelected);
+
 		return (
 			<div>
 				<BootstrapTable
 					id="resultTable"
+					ref="table"
 					keyField="appID"
-					data={this.state.data}
+					data={this.props.values}
 					columns={this.state.columns}
 					selectRow={selectRow}
 				/>
-				<Button color="success" tag="a" href="/AppInfo">
-					Select
-				</Button>
+
+				<Fade in={this.state.rowSelected}>
+					<Button color="success" id="fadeBtn" tag="a" href="/AppInfo">
+						Select
+					</Button>
+				</Fade>
 			</div>
 		);
 	}

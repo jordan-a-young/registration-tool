@@ -73,6 +73,11 @@ class AppStore {
 	toggleAcceptedAgreement = () => {
 		this.state.form.acceptTerms = this.state.form.acceptTerms;
 	};
+
+	@action
+	toggleSelectedResult = event => {
+		this.state.form.isSelected = !this.state.form.isSelected;
+	};
 }
 
 export default AppStore;

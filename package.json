@@ -11,6 +11,7 @@
 		"eslint": "^4.19.1",
 		"jquery": "3.3.1",
 		"react": "16.3.2",
+		"react-bootstrap-table": "4.3.1",
 		"react-bootstrap-table-next": "0.1.13",
 		"react-copy-to-clipboard": "5.0.1",
 		"react-dom": "16.3.2",

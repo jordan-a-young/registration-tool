@@ -1,76 +1,113 @@
 import React from "react";
-import {
-	AvForm,
-	AvField,
-	AvGroup,
-	AvInput,
-	AvFeedback,
-	AvRadioGroup,
-	AvRadio
-} from "availity-reactstrap-validation";
-import { Button, Label, FormGroup } from "reactstrap";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
-export default class Example extends React.Component {
+const products = [];
+
+function addProducts(quantity) {
+	const startId = products.length;
+	for (let i = 0; i < quantity; i++) {
+		const id = startId + i;
+		products.push({
+			id: id,
+			name: "Item name " + id,
+			price: 2100 + i
+		});
+	}
+}
+
+addProducts(100);
+
+const APPINFO = [
+	{
+		appID: "19999999",
+		name: "Availity",
+		type: "Clearinghouse",
+		taxID: "123456789",
+		npi: "1740375401",
+		status: "Live",
+		address: "123 This Way Dr",
+		zip: "32256",
+		orgPhone: "800-282-4548",
+		region: ["Florida"],
+		title: "Boss",
+		fName: "Indiana",
+		lName: "Jones",
+		userID: "HanSolo",
+		email: "hford@movies.com",
+		adminPhone: "555-555-5555"
+	},
+	{
+		appID: "1234567",
+		name: "Availity",
+		type: "Clearinghouse",
+		taxID: "123456789",
+		npi: "1740375401",
+		status: "Live",
+		address: "123 This Way Dr",
+		zip: "32256",
+		orgPhone: "800-282-4548",
+		region: ["Florida"],
+		title: "Boss",
+		fName: "Indiana",
+		lName: "Jones",
+		userID: "HanSolo",
+		email: "hford@movies.com",
+		adminPhone: "555-555-5555"
+	}
+];
+
+const app = [{ appID: "123", name: "Availity", taxID: "321" }];
+
+export default class FormExample extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.handleValidSubmit = this.handleValidSubmit.bind(this);
-		this.state = {};
+		this.onRowSelect = this.onRowSelect.bind(this);
+		this.state = {
+			selected: []
+		};
 	}
 
-	handleValidSubmit(event, values) {
-		this.setState({ values });
+	onRowSelect({ appID }, isSelected) {
+		if (isSelected && this.state.selected.length !== 1) {
+			this.setState({
+				selected: [...this.state.selected, appID].sort()
+			});
+		} else {
+			this.setState({
+				selected: this.state.selected.filter(it => it !== appID)
+			});
+		}
+		return false;
 	}
 
 	render() {
+		const selectRowProp = {
+			mode: "checkbox",
+			clickToSelect: true,
+			onSelect: this.onRowSelect,
+			selected: this.state.selected
+		};
+
+		const options = {
+			sortName: "appID",
+			sortOrder: "desc"
+		};
+
 		return (
-			<div>
-				<AvForm onValidSubmit={this.handleValidSubmit}>
-					{/* With AvField */}
-					<AvField name="name" label="Name" required />
-					{/* With AvGroup AvInput and AvFeedback to build your own */}
-					<AvGroup>
-						<Label for="example">Rank</Label>
-						<AvInput name="rank" id="example" required />
-						{/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
-						<AvFeedback>This is an error!</AvFeedback>
-					</AvGroup>
-					{/* Radios */}
-					<AvRadioGroup
-						inline
-						name="radioExample5"
-						label="Radio Buttons! (inline)"
-						required
-					>
-						<AvRadio label="Bulbasaur" value="Bulbasaur" />
-						<AvRadio label="Squirtle" value="Squirtle" />
-						<AvRadio label="Charmander" value="Charmander" />
-						<AvRadio label="Pikachu" value="Pikachu" disabled />
-					</AvRadioGroup>
-					{/* With select and AvField */}
-					<AvField
-						type="select"
-						name="select"
-						label="Option"
-						helpMessage="Idk, this is an example. Deal with it!"
-					>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-					</AvField>
-					<FormGroup>
-						<Button>Submit</Button>
-					</FormGroup>
-				</AvForm>
-				{this.state.values && (
-					<div>
-						<h5>Submission values</h5>
-						Values: <pre>{JSON.stringify(this.state.values, null, 2)}</pre>
-					</div>
-				)}
-			</div>
+			<BootstrapTable
+				ref="table"
+				data={APPINFO}
+				selectRow={selectRowProp}
+				options={options}
+			>
+				<TableHeaderColumn dataField="appID" isKey={true}>
+					Application ID
+				</TableHeaderColumn>
+				<TableHeaderColumn dataField="name">
+					Organization Name
+				</TableHeaderColumn>
+				<TableHeaderColumn dataField="taxID">Tax ID</TableHeaderColumn>
+			</BootstrapTable>
 		);
 	}
 }

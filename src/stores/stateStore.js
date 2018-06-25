@@ -16,7 +16,8 @@ class StateStore {
 					npi: null,
 					memberId: null,
 					dob: null,
-					acceptTerms: false
+					acceptTerms: false,
+					isSelected: false
 				},
 				page: {
 					title: null

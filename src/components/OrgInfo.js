@@ -9,11 +9,8 @@ import {
 import ProviderVerify from "./ProviderVerify";
 
 class OrgInfo extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
+		console.log(this.props);
 		return (
 			<div id="orgInfo">
 				<Card>

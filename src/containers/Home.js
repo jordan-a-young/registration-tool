@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
 import { Button, Col } from "reactstrap";
-import FormExample from "../components/FormExample";
 
 class Home extends React.Component {
 	render() {
@@ -12,7 +11,6 @@ class Home extends React.Component {
 					<Button color="success" tag="a" href="/ApplicationSearch">
 						Search here!
 					</Button>
-					<FormExample />
 				</Col>
 			</div>
 		);

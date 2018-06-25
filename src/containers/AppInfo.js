@@ -26,22 +26,8 @@ class AppInfo extends React.Component {
 				userID: this.props.data.userID,
 				email: this.props.data.email,
 				phone: this.props.data.adminPhone
-			},
-			data: []
+			}
 		};
-
-		this.handleNPIFetch = this.handleNPIFetch.bind(this);
-	}
-
-	handleNPIFetch() {
-		axios
-			.get(this.state.corsUrl + this.state.nppesUrl + this.state.org.npi)
-			.then(res => {
-				console.log(res);
-				const data = res.data.results;
-				this.setState({ data });
-				console.log(this.state.data);
-			});
 	}
 
 	render() {

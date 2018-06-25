@@ -69,7 +69,6 @@ class ResultsTable extends React.Component {
 			onSelect: this.onRowSelect,
 			selected: this.state.selected
 		};
-		console.log(this.state.rowSelected);
 
 		return (
 			<div>

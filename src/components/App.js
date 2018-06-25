@@ -21,7 +21,7 @@ class App extends React.Component {
 					/>
 					<Route
 						path="/AppInfo"
-						render={props => <AppInfo data={APPINFO} {...props} />}
+						render={props => <AppInfo data={APPLICATION} {...props} />}
 					/>
 				</Switch>
 			</div>
@@ -67,5 +67,24 @@ const APPINFO = [
 		adminPhone: "555-555-5555"
 	}
 ];
+
+const APPLICATION = {
+	appID: "19999999",
+	name: "Availity",
+	type: "Clearinghouse",
+	taxID: "123456789",
+	npi: "1740375401",
+	status: "Live",
+	address: "123 This Way Dr",
+	zip: "32256",
+	orgPhone: "800-282-4548",
+	region: ["Florida"],
+	title: "Boss",
+	fName: "Indiana",
+	lName: "Jones",
+	userID: "HanSolo",
+	email: "hford@movies.com",
+	adminPhone: "555-555-5555"
+};
 
 export default App;

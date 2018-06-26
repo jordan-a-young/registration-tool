@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 
 const HomeBread = props => {
@@ -17,9 +17,8 @@ const HomeBread = props => {
 				</BreadcrumbItem>
 			</Breadcrumb>
 		);
-	} else {
-		return null;
 	}
+	return null;
 };
 
 const SearchBread = props => {
@@ -32,9 +31,8 @@ const SearchBread = props => {
 				<BreadcrumbItem active>Search</BreadcrumbItem>
 			</Breadcrumb>
 		);
-	} else {
-		return null;
 	}
+	return null;
 };
 
 const ResultsBread = props => {
@@ -50,9 +48,8 @@ const ResultsBread = props => {
 				<BreadcrumbItem active>Results</BreadcrumbItem>
 			</Breadcrumb>
 		);
-	} else {
-		return null;
 	}
+	return null;
 };
 
 const AppBread = props => {
@@ -71,12 +68,11 @@ const AppBread = props => {
 				<BreadcrumbItem active>Application</BreadcrumbItem>
 			</Breadcrumb>
 		);
-	} else {
-		return null;
 	}
+	return null;
 };
 
-class Header extends React.Component {
+class Header extends Component {
 	render() {
 		return (
 			<div>

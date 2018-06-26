@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
 	Card,
 	CardBody,
@@ -8,9 +8,8 @@ import {
 } from "reactstrap";
 import ProviderVerify from "./ProviderVerify";
 
-class OrgInfo extends React.Component {
+class OrgInfo extends Component {
 	render() {
-		console.log(this.props);
 		return (
 			<div id="orgInfo">
 				<Card>
@@ -37,6 +36,7 @@ class OrgInfo extends React.Component {
 								<ProviderVerify
 									data={this.props.info}
 									orgName={this.props.info.name}
+									address={this.props.info.address}
 								/>
 							</ListGroupItem>
 							<ListGroupItem>

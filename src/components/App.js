@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "../containers/Home";
 import ApplicationSearch from "../containers/ApplicationSearch";
@@ -8,7 +8,7 @@ import "../index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
-class App extends React.Component {
+class App extends Component {
 	render() {
 		return (
 			<div>

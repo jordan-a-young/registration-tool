@@ -1,32 +1,33 @@
-import React from "react";
-import { FormGroup, Label, Button, Card, CardTitle } from "reactstrap";
+import React, { Component } from "react";
+import { FormGroup, Button, Card, CardTitle, CardBody } from "reactstrap";
 import { AvField, AvForm } from "availity-reactstrap-validation";
 import { Redirect } from "react-router-dom";
 
-class SearchForm extends React.Component {
+class SearchForm extends Component {
 	constructor() {
 		super();
-		this.state = { data: [], submitted: false };
-
-		this.handleReset = this.handleReset.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.state = {
+			data: [],
+			submitted: false
+		};
 	}
 
-	handleSubmit(values) {
+	handleSubmit = values => {
 		this.setState({ data: values, submitted: !this.state.submitted });
-	}
+	};
 
-	handleReset() {
+	handleReset = () => {
 		this.form && this.form.reset();
-	}
+		this.setState({ data: [] });
+	};
 
 	render() {
-		if (this.state.submitted) {
-			return <Redirect to="/Results" />;
-		} else {
-			return (
-				<div>
-					<Card>
+		if (this.state.submitted) return <Redirect to="/Results" />;
+
+		return (
+			<div>
+				<Card>
+					<CardBody>
 						<CardTitle>Search for an Application</CardTitle>
 						<AvForm
 							id="searchForm"
@@ -66,10 +67,10 @@ class SearchForm extends React.Component {
 								</Button>
 							</FormGroup>
 						</AvForm>
-					</Card>
-				</div>
-			);
-		}
+					</CardBody>
+				</Card>
+			</div>
+		);
 	}
 }
 

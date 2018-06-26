@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
 	Button,
 	Popover,
@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-class ProviderVerify extends React.Component {
+class ProviderVerify extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -19,22 +19,17 @@ class ProviderVerify extends React.Component {
 			address: "",
 			copied: false,
 			popoverOpen: false,
-			tooltipOpen: false,
-			tooltipText: "Verify NPI first to search Google."
+			tooltipOpen: false
 		};
-		this.popoverToggle = this.popoverToggle.bind(this);
-		this.tooltipToggle = this.tooltipToggle.bind(this);
-		this.handleSearch = this.handleSearch.bind(this);
-		this.searchGoogle = this.searchGoogle.bind(this);
 	}
 
-	popoverToggle() {
+	popoverToggle = () => {
 		this.setState({
 			popoverOpen: !this.state.popoverOpen
 		});
-	}
+	};
 
-	handleSearch() {
+	handleSearch = () => {
 		if (this.state.address) {
 			this.popoverToggle();
 		} else {
@@ -56,20 +51,17 @@ class ProviderVerify extends React.Component {
 				});
 			this.popoverToggle();
 		}
-	}
+	};
 
-	tooltipToggle() {
+	tooltipToggle = () => {
 		this.setState({
 			tooltipOpen: !this.state.tooltipOpen
 		});
-	}
+	};
 
-	searchGoogle() {
+	searchGoogle = () => {
 		if (this.state.address) window.open("https://www.google.com");
-		else {
-			console.log("You need to verify npi first");
-		}
-	}
+	};
 
 	render() {
 		let info, tooltipText;
@@ -96,7 +88,7 @@ class ProviderVerify extends React.Component {
 				</Popover>
 				{"  "}
 				<CopyToClipboard
-					text={this.props.orgName + " " + this.state.address}
+					text={this.props.orgName + " " + this.props.address}
 					onCopy={this.searchGoogle}
 				>
 					<Button color="info" id="searchBtn">

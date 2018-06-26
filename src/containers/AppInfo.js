@@ -1,11 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import { Container, Row, Col, Card, CardBody, Button } from "reactstrap";
-import axios from "axios";
 import Header from "../components/Header";
 import OrgInfo from "../components/OrgInfo";
 import AdminInfo from "../components/AdminInfo";
 
-class AppInfo extends React.Component {
+class AppInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

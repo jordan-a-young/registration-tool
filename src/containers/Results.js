@@ -1,10 +1,9 @@
-import React from "react";
-import { Container, Button, Fade } from "reactstrap";
-import BootstrapTable from "react-bootstrap-table-next";
+import React, { Component } from "react";
+import { Container } from "reactstrap";
 import Header from "../components/Header";
 import ResultsTable from "../components/ResultsTable";
 
-class Results extends React.Component {
+class Results extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

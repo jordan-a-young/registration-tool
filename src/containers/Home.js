@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import Header from "../components/Header";
 import { Button, Col } from "reactstrap";
 
-class Home extends React.Component {
+class Home extends Component {
 	render() {
 		return (
 			<div>

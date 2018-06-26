@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Button, Fade } from "reactstrap";
 
-class ResultsTable extends React.Component {
+class ResultsTable extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -35,12 +35,9 @@ class ResultsTable extends React.Component {
 				}
 			]
 		};
-
-		this.onRowSelect = this.onRowSelect.bind(this);
-		this.toggle = this.toggle.bind(this);
 	}
 
-	onRowSelect({ appID }, isSelected) {
+	onRowSelect = ({ appID }, isSelected) => {
 		if (isSelected && this.state.selected.length !== 1) {
 			this.setState({
 				selected: [...this.state.selected, appID].sort(),
@@ -54,11 +51,11 @@ class ResultsTable extends React.Component {
 		}
 
 		return false;
-	}
+	};
 
-	toggle() {
+	toggle = () => {
 		this.setState({ rowSelected: !this.state.rowSelected });
-	}
+	};
 
 	render(isSelected) {
 		const selectRow = {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
 	Card,
 	CardBody,
@@ -7,7 +7,7 @@ import {
 	ListGroupItem
 } from "reactstrap";
 
-class AdminInfo extends React.Component {
+class AdminInfo extends Component {
 	render() {
 		return (
 			<div id="adminInfo">

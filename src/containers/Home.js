@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import Header from "../components/Header";
-import { Button, Col } from "reactstrap";
+import UserLogin from "../components/UserLogin";
+import { Container, Col } from "reactstrap";
 
 class Home extends Component {
 	render() {
 		return (
 			<div>
 				<Header title="Home" currentPage="home" />
-				<Col>
-					<Button color="success" tag="a" href="/ApplicationSearch">
-						Search here!
-					</Button>
-				</Col>
+				<Container>
+					<Col sm="6">
+						<UserLogin />
+					</Col>
+				</Container>
 			</div>
 		);
 	}

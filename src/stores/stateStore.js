@@ -10,14 +10,8 @@ class StateStore {
 				},
 				form: {
 					selectedOrganization: null,
-					organizations: [],
-					selectedProvider: null,
-					providers: [],
-					npi: null,
-					memberId: null,
-					dob: null,
-					acceptTerms: false,
-					isSelected: false
+					appID: null,
+					memberId: null
 				},
 				page: {
 					title: null

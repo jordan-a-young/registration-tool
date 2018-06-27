@@ -49,12 +49,6 @@ class ResultsTable extends Component {
 				rowSelected: isSelected
 			});
 		}
-
-		return false;
-	};
-
-	toggle = () => {
-		this.setState({ rowSelected: !this.state.rowSelected });
 	};
 
 	render() {

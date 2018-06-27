@@ -1,14 +1,42 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Provider } from "mobx-react";
+import { configure } from "mobx";
 import Home from "../containers/Home";
 import ApplicationSearch from "../containers/ApplicationSearch";
 import Results from "../containers/Results";
 import AppInfo from "../containers/AppInfo";
+import { appStore, stateStore } from "../stores";
 import "../index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
-class App extends Component {
+const stores = { appStore, stateStore };
+window.stateStore = stateStore;
+configure({ enforceActions: true });
+
+const App = () => (
+	<Provider {...stores}>
+		<BrowserRouter basename="/">
+			<div>
+				<Switch>
+					<Route exact path="/" component={Home} />
+					<Route path="/ApplicationSearch" component={ApplicationSearch} />
+					<Route
+						path="/Results"
+						render={props => <Results values={APPINFO} {...props} />}
+					/>
+					<Route
+						path="/AppInfo"
+						render={props => <AppInfo data={APPLICATION} {...props} />}
+					/>
+				</Switch>
+			</div>
+		</BrowserRouter>
+	</Provider>
+);
+
+/*class App extends Component {
 	render() {
 		return (
 			<div>
@@ -27,7 +55,7 @@ class App extends Component {
 			</div>
 		);
 	}
-}
+}*/
 
 const APPINFO = [
 	{

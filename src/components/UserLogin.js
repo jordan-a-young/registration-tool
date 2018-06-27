@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { AvField, AvForm } from "availity-reactstrap-validation";
 import { FormGroup, Button, Card, CardTitle, CardBody } from "reactstrap";
 import { Redirect } from "react-router-dom";
+import { observer } from "mobx-react";
 
+@observer
 class UserLogin extends Component {
 	constructor() {
 		super();

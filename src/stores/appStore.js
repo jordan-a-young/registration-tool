@@ -78,6 +78,12 @@ class AppStore {
 	toggleSelectedResult = event => {
 		this.state.form.isSelected = !this.state.form.isSelected;
 	};
+
+	@action
+	setUsername = event => {
+		this.state.user.username = valueFromEvent(event);
+		console.log(valueFromEvent(event));
+	};
 }
 
 export default AppStore;

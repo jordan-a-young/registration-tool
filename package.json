@@ -10,6 +10,8 @@
 		"bootstrap": "latest",
 		"eslint": "^4.19.1",
 		"jquery": "3.3.1",
+		"mobx": "5.0.3",
+		"mobx-react": "5.2.3",
 		"react": "16.3.2",
 		"react-bootstrap-table": "4.3.1",
 		"react-bootstrap-table-next": "0.1.13",

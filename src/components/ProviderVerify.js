@@ -37,14 +37,9 @@ class ProviderVerify extends Component {
 				.get(this.state.corsUrl + this.state.nppesUrl + this.state.npi)
 				.then(res => {
 					const data = res.data.results;
-					const address =
-						data[0].addresses[0].address_1 +
-						" " +
-						data[0].addresses[0].address_2 +
-						" " +
-						data[0].addresses[0].city +
-						", " +
-						data[0].addresses[0].state;
+					const address = `${data[0].addresses[0].address_1} ${
+						data[0].addresses[0].address_2
+					} ${data[0].addresses[0].city}, ${data[0].addresses[0].state}`;
 					this.setState({
 						address: address
 					});

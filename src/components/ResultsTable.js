@@ -7,7 +7,7 @@ class ResultsTable extends Component {
 		super(props);
 		this.state = {
 			rowSelected: false,
-			selected: [],
+			selected: "",
 			columns: [
 				{
 					dataField: "appID",
@@ -38,14 +38,14 @@ class ResultsTable extends Component {
 	}
 
 	onRowSelect = ({ appID }, isSelected) => {
-		if (isSelected && this.state.selected.length !== 1) {
+		if (isSelected) {
 			this.setState({
-				selected: [...this.state.selected, appID].sort(),
+				selected: appID,
 				rowSelected: isSelected
 			});
 		} else {
 			this.setState({
-				selected: this.state.selected.filter(it => it !== appID),
+				selected: "",
 				rowSelected: isSelected
 			});
 		}
@@ -57,7 +57,7 @@ class ResultsTable extends Component {
 		this.setState({ rowSelected: !this.state.rowSelected });
 	};
 
-	render(isSelected) {
+	render() {
 		const selectRow = {
 			mode: "checkbox",
 			clickToSelect: true,

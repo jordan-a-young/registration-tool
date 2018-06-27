@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Provider } from "mobx-react";
 import { configure } from "mobx";
@@ -35,27 +35,6 @@ const App = () => (
 		</BrowserRouter>
 	</Provider>
 );
-
-/*class App extends Component {
-	render() {
-		return (
-			<div>
-				<Switch>
-					<Route exact path="/" component={Home} />
-					<Route path="/ApplicationSearch" component={ApplicationSearch} />
-					<Route
-						path="/Results"
-						render={props => <Results values={APPINFO} {...props} />}
-					/>
-					<Route
-						path="/AppInfo"
-						render={props => <AppInfo data={APPLICATION} {...props} />}
-					/>
-				</Switch>
-			</div>
-		);
-	}
-}*/
 
 const APPINFO = [
 	{

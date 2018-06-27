@@ -83,7 +83,7 @@ class ProviderVerify extends Component {
 				</Popover>
 				{"  "}
 				<CopyToClipboard
-					text={this.props.orgName + " " + this.props.address}
+					text={`${this.props.orgName} ${this.props.address}`}
 					onCopy={this.searchGoogle}
 				>
 					<Button color="info" id="searchBtn">

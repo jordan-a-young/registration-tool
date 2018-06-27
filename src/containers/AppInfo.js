@@ -34,6 +34,7 @@ class AppInfo extends Component {
 			<div id="appInfo">
 				<Header title="Application Info" currentPage="info" />
 				<Container>
+					<h4>Application: {this.props.data.appID}</h4>
 					<Row>
 						<Col sm="6">
 							<OrgInfo info={this.state.org} />

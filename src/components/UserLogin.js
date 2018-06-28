@@ -14,13 +14,9 @@ class UserLogin extends Component {
 			submitted: false
 		};
 	}
-
 	static propTypes = {
 		appStore: PropTypes.shape({
 			state: PropTypes.any
-		}),
-		history: PropTypes.shape({
-			push: PropTypes.func
 		})
 	};
 
@@ -29,13 +25,14 @@ class UserLogin extends Component {
 		appStore.setUsername(event.target.value);
 	};
 
-	handleSubmit = () => {
-		this.setState({ submitted: true });
+	handleSubmit = event => {
+		const { appStore } = this.props;
+		appStore.toggleSelectedResult();
+		this.setState({ submitted: !this.state.submitted });
 	};
 
 	handleReset = () => {
 		this.form && this.form.reset();
-		this.setState({ submitted: false });
 	};
 
 	render() {

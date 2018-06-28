@@ -11,7 +11,8 @@ class StateStore {
 				form: {
 					selectedOrganization: null,
 					appID: null,
-					memberId: null
+					taxID: null,
+					isSelected: false
 				},
 				page: {
 					title: null

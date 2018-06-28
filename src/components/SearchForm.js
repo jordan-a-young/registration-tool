@@ -2,23 +2,36 @@ import React, { Component } from "react";
 import { FormGroup, Button, Card, CardTitle, CardBody } from "reactstrap";
 import { AvField, AvForm } from "availity-reactstrap-validation";
 import { Redirect } from "react-router-dom";
+import { observer, inject } from "mobx-react";
+import PropTypes from "prop-types";
 
+@inject("appStore")
+@observer
 class SearchForm extends Component {
 	constructor() {
 		super();
 		this.state = {
-			data: [],
 			submitted: false
 		};
 	}
 
-	handleSubmit = values => {
-		this.setState({ data: values, submitted: !this.state.submitted });
+	static propTypes = {
+		appStore: PropTypes.shape({
+			state: PropTypes.any
+		})
+	};
+
+	handleSubmit = event => {
+		const { appStore } = this.props;
+		appStore.setSelectedOrganization(this.form._inputs.orgName.value);
+		appStore.setAppID(this.form._inputs.appID.value);
+		appStore.setTaxID(this.form._inputs.taxID.value);
+		appStore.toggleSelectedResult();
+		this.setState({ submitted: !this.state.submitted });
 	};
 
 	handleReset = () => {
 		this.form && this.form.reset();
-		this.setState({ data: [] });
 	};
 
 	render() {

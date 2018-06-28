@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import { Button, Fade } from "reactstrap";
+import { observer, inject } from "mobx-react";
+import PropTypes from "prop-types";
 
+@inject("appStore")
+@observer
 class ResultsTable extends Component {
 	constructor(props) {
 		super(props);
@@ -37,6 +41,12 @@ class ResultsTable extends Component {
 		};
 	}
 
+	static propTypes = {
+		appStore: PropTypes.shape({
+			state: PropTypes.any
+		})
+	};
+
 	onRowSelect = ({ appID }, isSelected) => {
 		if (isSelected) {
 			this.setState({
@@ -60,6 +70,9 @@ class ResultsTable extends Component {
 			onSelect: this.onRowSelect,
 			selected: this.state.selected
 		};
+
+		const { appStore } = this.props;
+		console.log(appStore.state);
 
 		return (
 			<div>

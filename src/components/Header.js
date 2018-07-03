@@ -87,7 +87,9 @@ class Header extends Component {
 		const { appStore } = this.props;
 		return (
 			<div>
-				<h1 id="header">{appStore.state.page.title}</h1>
+				<h1 id="header" className="text-center">
+					{appStore.state.page.title}
+				</h1>
 				<HomeBread currentPage={this.props.currentPage} />
 				<SearchBread currentPage={this.props.currentPage} />
 				<ResultsBread currentPage={this.props.currentPage} />

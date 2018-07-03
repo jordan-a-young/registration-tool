@@ -3,7 +3,11 @@ import { Container, Row, Col, Card, CardBody, Button } from "reactstrap";
 import Header from "../components/Header";
 import OrgInfo from "../components/OrgInfo";
 import AdminInfo from "../components/AdminInfo";
+import { observer, inject } from "mobx-react";
+import PropTypes from "prop-types";
 
+@inject("appStore")
+@observer
 class AppInfo extends Component {
 	constructor(props) {
 		super(props);
@@ -29,10 +33,22 @@ class AppInfo extends Component {
 		};
 	}
 
+	static propTypes = {
+		appStore: PropTypes.shape({
+			state: PropTypes.any
+		})
+	};
+
+	componentWillMount() {
+		const { appStore } = this.props;
+		appStore.setPageTitle("Application Info");
+		console.log(appStore.state);
+	}
+
 	render() {
 		return (
 			<div id="appInfo">
-				<Header title="Application Info" currentPage="info" />
+				<Header currentPage="info" />
 				<Container>
 					<h4>Application: {this.props.data.appID}</h4>
 					<Row>

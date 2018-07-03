@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
+import { observer, inject } from "mobx-react";
+import PropTypes from "prop-types";
 
 const HomeBread = props => {
 	if (props.currentPage === "home") {
@@ -72,11 +74,20 @@ const AppBread = props => {
 	return null;
 };
 
+@inject("appStore")
+@observer
 class Header extends Component {
+	static propTypes = {
+		appStore: PropTypes.shape({
+			state: PropTypes.any
+		})
+	};
+
 	render() {
+		const { appStore } = this.props;
 		return (
 			<div>
-				<h1 id="header">{this.props.title}</h1>
+				<h1 id="header">{appStore.state.page.title}</h1>
 				<HomeBread currentPage={this.props.currentPage} />
 				<SearchBread currentPage={this.props.currentPage} />
 				<ResultsBread currentPage={this.props.currentPage} />

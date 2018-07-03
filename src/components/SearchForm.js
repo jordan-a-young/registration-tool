@@ -8,12 +8,9 @@ import PropTypes from "prop-types";
 @inject("appStore")
 @observer
 class SearchForm extends Component {
-	constructor() {
-		super();
-		this.state = {
-			submitted: false
-		};
-	}
+	state = {
+		submitted: false
+	};
 
 	static propTypes = {
 		appStore: PropTypes.shape({
@@ -21,12 +18,11 @@ class SearchForm extends Component {
 		})
 	};
 
-	handleSubmit = event => {
+	handleSubmit = (event, values) => {
 		const { appStore } = this.props;
-		appStore.setSelectedOrganization(this.form._inputs.orgName.value);
-		appStore.setAppID(this.form._inputs.appID.value);
-		appStore.setTaxID(this.form._inputs.taxID.value);
-		appStore.toggleSelectedResult();
+		appStore.setSelectedOrganization(values.orgName);
+		appStore.setAppID(values.appID);
+		appStore.setTaxID(values.taxID);
 		this.setState({ submitted: !this.state.submitted });
 	};
 

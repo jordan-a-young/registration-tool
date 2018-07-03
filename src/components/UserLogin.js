@@ -8,12 +8,10 @@ import PropTypes from "prop-types";
 @inject("appStore")
 @observer
 class UserLogin extends Component {
-	constructor() {
-		super();
-		this.state = {
-			submitted: false
-		};
-	}
+	state = {
+		submitted: false
+	};
+
 	static propTypes = {
 		appStore: PropTypes.shape({
 			state: PropTypes.any

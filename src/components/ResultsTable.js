@@ -48,17 +48,10 @@ class ResultsTable extends Component {
 	};
 
 	onRowSelect = ({ appID }, isSelected) => {
-		if (isSelected) {
-			this.setState({
-				selected: appID,
-				rowSelected: isSelected
-			});
-		} else {
-			this.setState({
-				selected: "",
-				rowSelected: isSelected
-			});
-		}
+		this.setState({
+			selected: appID ? appID : "",
+			rowSelected: isSelected
+		});
 	};
 
 	render() {

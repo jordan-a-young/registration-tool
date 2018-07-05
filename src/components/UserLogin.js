@@ -24,8 +24,6 @@ class UserLogin extends Component {
 	};
 
 	handleSubmit = event => {
-		const { appStore } = this.props;
-		appStore.toggleSelectedResult();
 		this.setState({ submitted: !this.state.submitted });
 	};
 
@@ -35,7 +33,6 @@ class UserLogin extends Component {
 
 	render() {
 		if (this.state.submitted) return <Redirect to="/ApplicationSearch" />;
-
 		return (
 			<div>
 				<Card>

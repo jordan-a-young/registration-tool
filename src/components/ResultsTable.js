@@ -11,7 +11,7 @@ class ResultsTable extends Component {
 		super(props);
 		this.state = {
 			rowSelected: false,
-			selected: "",
+			selected: [],
 			columns: [
 				{
 					dataField: "appID",
@@ -70,6 +70,8 @@ class ResultsTable extends Component {
 			onSelect: this.onRowSelect,
 			selected: this.state.selected
 		};
+
+		console.log(this.state.selected);
 
 		return (
 			<div>
